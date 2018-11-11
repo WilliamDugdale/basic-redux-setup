@@ -1,22 +1,10 @@
-import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
+import { setupStore, actions, selectors } from './redux-nodes'
+import rootNode from './state'
 
-let test = (state = {
-    count: 0
-}, action) => {
-    switch (action.type) {
-      case 'INCREMENT':
-        return {count: state.count + 1};
-      default:
-        return state;
-    }
-  }
-  
-let store = createStore(test, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-let increment = () => ({type: 'INCREMENT'})
+let store = setupStore(rootNode)
 
 class TestApp extends Component {   
   render() {
@@ -29,11 +17,11 @@ class TestApp extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {count: state.count}
+  return {count: selectors.getCount(state)}
 }
 
 const mapDispatchToProps = dispatch => ({
-  test: () => dispatch(increment())
+  test: () => dispatch(actions.increment())
 })
 
 let App = connect(mapStateToProps, mapDispatchToProps)(TestApp);
