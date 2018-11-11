@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "parcel": "^1.10.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.6.1",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1"
+  },
+  "scripts": {
+    "start": "parcel --hmr-port 44444 index.html"
+  }
+}
